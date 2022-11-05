@@ -3,6 +3,7 @@
   "private": true,
   "scripts": {
     "boot": "yarn && lerna bootstrap",
+    "clean": "lerna clean -y",
     "format": "prettier '**/*.{js,jsx,ts,tsx,json,md}' --write",
     "lint": "eslint 'packages/**/*.{js,jsx,ts,tsx}' --fix",
     "stylelint": "stylelint '**/*.{css,less,scss}' --fix",
