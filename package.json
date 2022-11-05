@@ -3,13 +3,15 @@
   "private": true,
   "scripts": {
     "boot": "yarn && lerna bootstrap",
-    "format": "prettier '**/*.{js,jsx,ts,tsx,json,md}' --write"
+    "format": "prettier '**/*.{js,jsx,ts,tsx,json,md}' --write",
+    "prepare": "husky install"
   },
   "workspaces": [
     "packages/*"
   ],
   "devDependencies": {
     "lerna": "^5.6.2",
-    "prettier": "2.7.1"
+    "prettier": "2.7.1",
+    "husky": "^8.0.0"
   }
 }
