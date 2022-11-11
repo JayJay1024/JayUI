@@ -30,5 +30,5 @@ export interface MonthDate {
 
 export interface Month {
   month: Date;
-  dates: MonthDate[][];
+  dates: MonthDate[];
 }

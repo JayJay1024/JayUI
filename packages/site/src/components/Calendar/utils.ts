@@ -1,6 +1,6 @@
 import { getDaysInMonth, getDay, format, isSameDay, isBefore, isAfter } from "date-fns";
 import { Month, MonthDate } from "./types";
-import { DAYS_PER_WEEK, DISPLAY_DATA_EVERY_MONTH } from "./config";
+import { DISPLAY_DATA_EVERY_MONTH } from "./config";
 
 /**
  *
@@ -14,12 +14,11 @@ const getTotalDaysInMonth = (month: number, year: number) => {
 
 /**
  *
- * @param month 1 ... 12
- * @param year 2022 e.g.
+ * @param date the date time
  * @returns 0 | 1 | 2 | 3 | 4 | 5 | 6, the day of week, 0 represents Sunday
  */
-const getDayOfWeekOfMonthFirstDay = (month: number, year: number) => {
-  return getDay(new Date(year, month - 1, 1));
+export const getDayOfWeek = (date: Date) => {
+  return getDay(date);
 };
 
 /**
@@ -28,9 +27,9 @@ const getDayOfWeekOfMonthFirstDay = (month: number, year: number) => {
  * @param year 2022 e.g.
  * @returns 0 | 1 | 2 | 3 | 4 | 5 | 6, the day of week, 0 represents Sunday
  */
-// const getDayOfWeekOfMonthLastDay = (month: number, year: number) => {
-//   return getDay(new Date(year, month - 1, getTotalDaysInMonth(month, year)));
-// };
+const getDayOfWeekOfMonthFirstDay = (month: number, year: number) => {
+  return getDay(new Date(year, month - 1, 1));
+};
 
 /**
  *
@@ -115,12 +114,7 @@ const getMonthDays = (month: number, year: number) => {
     }
   }
 
-  const output: MonthDate[][] = [];
-  for (let i = 0; i < result.length; i += DAYS_PER_WEEK) {
-    output.push(result.slice(i, i + DAYS_PER_WEEK));
-  }
-
-  return output;
+  return result;
 };
 
 /**
