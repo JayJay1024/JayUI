@@ -1,6 +1,6 @@
 import { getDaysInMonth, getDay, format, isSameDay, isBefore, isAfter } from "date-fns";
-import { Month, MonthDate, DayOfTheWeek } from "./types";
-import { DAYS_PER_WEEK } from "./config";
+import { Month, MonthDate } from "./types";
+import { DAYS_PER_WEEK, DISPLAY_DATA_EVERY_MONTH } from "./config";
 
 /**
  *
@@ -28,9 +28,9 @@ const getDayOfWeekOfMonthFirstDay = (month: number, year: number) => {
  * @param year 2022 e.g.
  * @returns 0 | 1 | 2 | 3 | 4 | 5 | 6, the day of week, 0 represents Sunday
  */
-const getDayOfWeekOfMonthLastDay = (month: number, year: number) => {
-  return getDay(new Date(year, month - 1, getTotalDaysInMonth(month, year)));
-};
+// const getDayOfWeekOfMonthLastDay = (month: number, year: number) => {
+//   return getDay(new Date(year, month - 1, getTotalDaysInMonth(month, year)));
+// };
 
 /**
  *
@@ -83,7 +83,6 @@ const getMonthDays = (month: number, year: number) => {
 
   const totalDaysInThisMonth = getTotalDaysInMonth(month, year);
   const dayOfWeekOfThisMonthFirstDay = getDayOfWeekOfMonthFirstDay(month, year);
-  const dayOfWeekOfThisMonthLastDay = getDayOfWeekOfMonthLastDay(month, year);
 
   const nextMonth = getNextMonth(month, year);
   const previousMonth = getPreviousMonth(month, year);
@@ -106,11 +105,14 @@ const getMonthDays = (month: number, year: number) => {
   }
 
   // next month overflow days
-  for (let i = 1; i <= DayOfTheWeek.Sat - dayOfWeekOfThisMonthLastDay; i++) {
-    result.push({
-      date: new Date(nextMonth.year, nextMonth.month - 1, i),
-      isCurrentMonth: false,
-    });
+  if (result.length < DISPLAY_DATA_EVERY_MONTH) {
+    const count = DISPLAY_DATA_EVERY_MONTH - result.length;
+    for (let i = 1; i <= count; i++) {
+      result.push({
+        date: new Date(nextMonth.year, nextMonth.month - 1, i),
+        isCurrentMonth: false,
+      });
+    }
   }
 
   const output: MonthDate[][] = [];
