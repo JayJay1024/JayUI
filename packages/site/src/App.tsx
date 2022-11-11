@@ -1,5 +1,6 @@
 import { useCallback, useState } from "react";
 import { Calendar } from "./components/Calendar";
+import { Notification } from "./components/Notification";
 
 interface Duration {
   start?: Date | number | null;
@@ -25,7 +26,7 @@ function App() {
 
   return (
     <div className="w-screen h-screen flex items-center justify-center">
-      <div className="flex flex-col gap-2">
+      <div className="hidden flex-col gap-2">
         <div className="flex items-center justify-between gap-1 border rounded-lg h-12">
           <span className="w-2/5 text-center">{durationFormat.start ?? "Empty"}</span>
           <span>{" => "}</span>
@@ -37,6 +38,10 @@ function App() {
           onChange={handleChange}
           onFormatedChange={handleFormatedChange}
         />
+      </div>
+
+      <div className="mt-4 border border-red-100 p-3">
+        <Notification />
       </div>
     </div>
   );
