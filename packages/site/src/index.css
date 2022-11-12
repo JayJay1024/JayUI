@@ -2,6 +2,30 @@
 @tailwind components;
 @tailwind utilities;
 
+.accordion-enter {
+  @apply opacity-0 h-0;
+}
+
+.accordion-enter-active {
+  @apply opacity-100 transition-all duration-700;
+}
+
+.accordion-enter-done {
+  @apply opacity-100;
+}
+
+.accordion-exit {
+  @apply opacity-100;
+}
+
+.accordion-exit-active {
+  @apply transition-all duration-700 opacity-0 !h-0;
+}
+
+.accordion-exit-done {
+  @apply opacity-0;
+}
+
 :root {
   font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
   font-size: 16px;

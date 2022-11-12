@@ -1,6 +1,7 @@
 import { useCallback, useState } from "react";
 import { Calendar } from "./components/Calendar";
 import { Notification } from "./components/Notification";
+import { Accordion } from "./components/Accordion";
 
 interface Duration {
   start?: Date | number | null;
@@ -25,7 +26,7 @@ function App() {
   }, []);
 
   return (
-    <div className="w-screen h-screen flex items-center justify-center">
+    <div className="w-screen h-screen flex flex-col items-center pt-24">
       <div className="hidden flex-col gap-2">
         <div className="flex items-center justify-between gap-1 border rounded-lg h-12">
           <span className="w-2/5 text-center">{durationFormat.start ?? "Empty"}</span>
@@ -40,8 +41,12 @@ function App() {
         />
       </div>
 
-      <div className="mt-4 border border-red-100 p-3">
+      <div className="mt-4 border border-red-100 p-3 hidden">
         <Notification />
+      </div>
+
+      <div className="border border-red-100 p-3">
+        <Accordion />
       </div>
     </div>
   );
