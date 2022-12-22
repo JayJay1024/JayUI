@@ -47,6 +47,8 @@ function App() {
 
       <div className="border border-red-100 p-3">
         <Accordion />
+        <Accordion />
+        <Accordion />
       </div>
     </div>
   );

@@ -1,42 +1,41 @@
 import { useEffect, useRef, useState } from "react";
-import { CSSTransition } from "react-transition-group";
 
 export const Accordion = () => {
   const nodeRef = useRef<HTMLDivElement>(null);
-  const [inProp, setInProp] = useState(false);
+  const [expanded, setExpanded] = useState(false);
 
   const handleClick = () => {
-    setInProp((prev) => !prev);
+    setExpanded((prev) => !prev);
   };
 
   useEffect(() => {
-    if (inProp && nodeRef.current) {
+    if (expanded && nodeRef.current) {
       nodeRef.current.style.height = `${nodeRef.current.scrollHeight}px`;
+    } else if (!expanded && nodeRef.current) {
+      nodeRef.current.style.height = "0px";
     }
-  }, [inProp]);
+  }, [expanded]);
 
   return (
     <div className="w-96">
       <div className="flex items-center justify-between">
         <h3>Accordion</h3>
         <button
-          className={`border-none hover:border-none focus:outline-none focus-visible:outline-none bg-transparent transition-transform duration-300 ${
-            inProp ? "-rotate-90" : "rotate-90"
-          }`}
+          className="border-none hover:border-none focus:outline-none focus-visible:outline-none bg-transparent transition-transform duration-300"
+          style={{ ...{ transform: expanded ? "rotateZ(90deg)" : "rotateZ(-90deg)" } }}
           onClick={handleClick}
         >
           {"->"}
         </button>
       </div>
 
-      <CSSTransition nodeRef={nodeRef} in={inProp} timeout={700} unmountOnExit classNames="accordion">
-        <div ref={nodeRef} className="h-max">
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex, sit amet blandit
-            leo lobortis eget.
-          </p>
-        </div>
-      </CSSTransition>
+      <div ref={nodeRef} className="transition-[height] duration-300 overflow-hidden">
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex, sit amet blandit leo
+          lobortis eget.
+        </p>
+        <div className="h-8 bg-blue-600 text-white">ddd</div>
+      </div>
     </div>
   );
 };
